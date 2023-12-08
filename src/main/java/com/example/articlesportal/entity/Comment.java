@@ -24,7 +24,7 @@ public class Comment {
 
     private String commentText;
 
-//    @CreationTimestamp
+    @CreationTimestamp
     private LocalDateTime createdAt;
 
     //relation one to many?

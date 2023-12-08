@@ -27,7 +27,7 @@ public class Article {
     //one to one relation, ref username?
     private String author; // logged in username(User)
 
-//    @CreationTimestamp
+    @CreationTimestamp
     private LocalDateTime createdAt;
 
 //    private String image; (bonus)

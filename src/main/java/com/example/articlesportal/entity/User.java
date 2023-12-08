@@ -1,9 +1,6 @@
 package com.example.articlesportal.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
@@ -16,6 +13,7 @@ public class User {
     private Long identifier;
 
     //unique
+    @Column(unique = true)
     private String username;
 
     private String mobileNumber;
@@ -23,6 +21,7 @@ public class User {
     private String password;
 
     //unique
+    @Column(unique = true)
     private String email;
 
     //relations
