@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/auth")
 public class AuthController {
 
-    @PostMapping("/user")
+    @PostMapping("/user") // --> might need to use @RequestParam to send query params via url in angualr
     public ResponseEntity<User> registerNewUser(@RequestBody User user){ //@valid validate new user
         //save user in repo
         return ResponseEntity.ok(user);

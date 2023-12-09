@@ -3,9 +3,13 @@ package com.example.articlesportal.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
-@Entity
-@Data
+import java.util.List;
 
+@Entity
+@Table(name = "users")
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class User {
 
     @Id
@@ -24,7 +28,10 @@ public class User {
     @Column(unique = true)
     private String email;
 
-    //relations
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "author", cascade = CascadeType.ALL)
+    private List<Article> articles;
+
     //many to many
 //    private List<Privileges> privileges; --> ROLE_USER
 

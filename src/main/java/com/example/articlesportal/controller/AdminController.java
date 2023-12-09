@@ -1,17 +1,23 @@
 package com.example.articlesportal.controller;
 
+import com.example.articlesportal.entity.User;
+import com.example.articlesportal.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.ResourceBundle;
 
 @RestController
 @RequestMapping("/api/article")
 @RequiredArgsConstructor
 public class AdminController {
+
+    @Autowired
+    private UserRepository repo;
 
 
     @PutMapping("/{id}/disable")
@@ -28,4 +34,11 @@ public class AdminController {
         return ResponseEntity.ok(HttpStatus.ACCEPTED);
     }
 
+
+    //test contorller
+    @GetMapping("/test")
+    public ResponseEntity<List<User>> getUsers() {
+        List<User> users = this.repo.findAll();
+        return ResponseEntity.ok(users);
+    }
 }

@@ -10,6 +10,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import java.time.LocalDateTime;
 
 @Entity
+@Table(name = "articles")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -24,19 +25,22 @@ public class Article {
     @Column(columnDefinition = "TEXT")
     private String body; // less than 500 chars
 
-    //one to one relation, ref username?
-    private String author; // logged in username(User)
 
     @CreationTimestamp
     private LocalDateTime createdAt;
 
-//    private String image; (bonus)
 
     private Integer numberOfLikes;
 
     private Integer numberOfDislikes;
 
     private Boolean isDisabled;
+
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "author_id")
+    private User author;
+
 
 
 }

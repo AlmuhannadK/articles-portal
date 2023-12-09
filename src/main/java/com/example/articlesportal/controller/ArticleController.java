@@ -1,9 +1,12 @@
 package com.example.articlesportal.controller;
 
+import com.example.articlesportal.dto.ArticleDto;
 import com.example.articlesportal.entity.Article;
 import com.example.articlesportal.entity.Comment;
 import com.example.articlesportal.repository.ArticleRepository;
 import com.example.articlesportal.service.ArticleService;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.Min;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,42 +26,67 @@ public class ArticleController {
 
     private final ArticleService articleService;
 
-    // temporary will remove later (testing)
-    @Autowired
-    private ArticleRepository repo;
 
-
-    @PostMapping("")
+    @PostMapping()
 //    @PreAuthorize("hasAnyAuthority(‘USER’)”) --> USERS only
-    public ResponseEntity<Article> postNewArticle(@RequestBody Article article) { // --> @Valid validate article
-        return ResponseEntity.ok(this.articleService.postNewArticle(article));
-    }
+    public ResponseEntity<ArticleDto> postNewArticle(@RequestBody @Valid ArticleDto articleDto) {
 
+        return new ResponseEntity<>(this.articleService.postNewArticle(articleDto), HttpStatus.CREATED);
+    }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Article> getArticle(@PathVariable("id") Long id) {
-        // fetch article by id from repo, then store in variable and return
-
-        //temp
-        Article article = new Article();
-        return ResponseEntity.ok(article);
+    public ResponseEntity<ArticleDto> getArticleById(@PathVariable("id") @Min(1) Long id) {
+        return ResponseEntity.ok(this.articleService.getArticleById(id));
     }
 
-    @GetMapping("") //Paginated article list
-    public ResponseEntity<Page<Article>> getArticlesPaginated(Pageable pageable) {
-        return ResponseEntity.ok(this.repo.findAllArticles(pageable));
+    @GetMapping() //Paginated article list
+    public ResponseEntity<Page<ArticleDto>> getArticlesPaginated(Pageable pageable) {
+        return ResponseEntity.ok(null);
     }
+//
+//    // BONUS images here (not important right now)
+//
+//    @DeleteMapping("/{id}")
+////    @PreAuthorize("isAuthenticated()") --> user can delete their own articles only (how to specify owner only can del?)
+//    public ResponseEntity<HttpStatus> deleteArticle(@PathVariable("id") Long id) {
+//        // make sure it's available first, then delete via repository
+//
+//        // need to fix later
+//        return ResponseEntity.ok(HttpStatus.ACCEPTED);
+//    }
 
-    // BONUS images here (not important right now)
 
-    @DeleteMapping("/{id}")
-//    @PreAuthorize("isAuthenticated()") --> user can delete their own articles only (how to specify owner only can del?)
-    public ResponseEntity<HttpStatus> deleteArticle(@PathVariable("id") Long id) {
-        // make sure it's available first, then delete via repository
 
-        // need to fix later
-        return ResponseEntity.ok(HttpStatus.ACCEPTED);
-    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     /////// Comments ///////
@@ -66,7 +94,7 @@ public class ArticleController {
 //    @PreAuthorize("hasAnyAuthority(‘USER’)”)
     public ResponseEntity<HttpStatus> commentArticle(@PathVariable("id") Long id, @RequestBody Comment comment) { // --> @Valid validate comment
         // fetch article by id via repo, then append created comment
-        return ResponseEntity.ok(HttpStatus.ACCEPTED);
+        return ResponseEntity.ok(HttpStatus.CREATED);
     }
 
     @GetMapping("/{id}/comment") //public
