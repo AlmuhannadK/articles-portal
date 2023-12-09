@@ -24,9 +24,7 @@ public class Comment {
     @CreationTimestamp
     private LocalDateTime createdAt;
 
-
     private String username; //get from SecurityContextHolder
-
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "article_id", nullable = false)

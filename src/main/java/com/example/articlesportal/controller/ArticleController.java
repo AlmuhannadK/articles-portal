@@ -1,6 +1,7 @@
 package com.example.articlesportal.controller;
 
 import com.example.articlesportal.dto.ArticleDto;
+import com.example.articlesportal.dto.CommentDto;
 import com.example.articlesportal.entity.Comment;
 import com.example.articlesportal.service.ArticleService;
 import com.example.articlesportal.service.CommentService;
@@ -48,42 +49,10 @@ public class ArticleController {
     public ResponseEntity<String> deleteArticle(@PathVariable("id") Long id) {
 
         this.articleService.deleteArticleById(id);
-        return new ResponseEntity<>("Article deleted successfully!", HttpStatus.OK);
+        return ResponseEntity.ok("Article deleted successfully!");
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-    /////// Comments ///////
-    @PostMapping("/{id}/comment")
-//    @PreAuthorize("hasAnyAuthority(‘USER’)”)
-    public ResponseEntity<HttpStatus> commentArticle(@PathVariable("id") Long id, @RequestBody Comment comment) { // --> @Valid validate comment
-        // fetch article by id via repo, then append created comment
-        return ResponseEntity.ok(HttpStatus.CREATED);
-    }
-
-    @GetMapping("/{id}/comment") //public
-    public ResponseEntity<List<Comment>> getAllComments(@PathVariable("id") Long id) {
-        // fetch article by id via repo, then show all comments appended to article
-        // article.findById(id)
-        //article.getComments();
-
-        //return service that has repo return list of comments here
-        return ResponseEntity.ok(null);
-    }
-    ////////////////////////////
-
-
-    /////// Like & Dislikes ///////
+                                        /////// Like & Dislikes ///////
     @PutMapping("/{id}/like")
 //    @PreAuthorize("hasAnyAuthority(‘USER’)”) --> users only
     public ResponseEntity<HttpStatus> articleLike(@PathVariable("id") Long id) {

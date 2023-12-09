@@ -1,11 +1,9 @@
 package com.example.articlesportal.dto;
 
-import jakarta.persistence.UniqueConstraint;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+
 
 import java.util.Set;
 
@@ -23,7 +21,6 @@ public class ArticleDto {
     private Set<CommentDto> comments;
 
 
-    // change values after mapping to entity
 
 //    private Integer numberOfLikes;
 //    private Integer numberOfDislikes;
