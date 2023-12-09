@@ -1,15 +1,13 @@
 package com.example.articlesportal.controller;
 
 import com.example.articlesportal.dto.ArticleDto;
-import com.example.articlesportal.entity.Article;
 import com.example.articlesportal.entity.Comment;
-import com.example.articlesportal.repository.ArticleRepository;
 import com.example.articlesportal.service.ArticleService;
+import com.example.articlesportal.service.CommentService;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Min;
 import lombok.RequiredArgsConstructor;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -25,6 +23,7 @@ import java.util.List;
 public class ArticleController {
 
     private final ArticleService articleService;
+    private final CommentService commentService;
 
 
     @PostMapping()
@@ -98,18 +97,5 @@ public class ArticleController {
         // fetch article by id, then increment dislike counter ( set dislike++?)
         return ResponseEntity.ok(HttpStatus.ACCEPTED);
     }
-
-    ////////////////////////////
-
-
-
-
-
-
-
-
-
-
-
 
 }

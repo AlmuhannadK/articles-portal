@@ -39,7 +39,7 @@ public class ArticleService {
             ArticleDto articleDto = mapToDto(articleEntity);
             return articleDto;
         } else {
-            optionalArticle.orElseThrow();
+            optionalArticle.orElseThrow(() -> new ResourceNotFoundException("Article", "id", id));
         }
         return null;
     }
@@ -52,11 +52,9 @@ public class ArticleService {
 
     public void deleteArticleById(Long id) {
 
-        Article article = this.articleRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Article", "id", "id"));
+        Article article = this.articleRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Article", "id", id));
         this.articleRepository.delete(article);
     }
-
-
 
     //convert Entity to Dto
     private ArticleDto mapToDto(Article article) {

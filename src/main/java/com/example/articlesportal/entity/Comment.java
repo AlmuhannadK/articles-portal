@@ -14,8 +14,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Comment {
-    //USERS only
-    //all required in api
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -24,6 +23,9 @@ public class Comment {
 
     @CreationTimestamp
     private LocalDateTime createdAt;
+
+
+    private String username; //get from SecurityContextHolder
 
 
     @ManyToOne(fetch = FetchType.LAZY)
