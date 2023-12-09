@@ -28,7 +28,7 @@ public class ArticleController {
     private ArticleRepository repo;
 
 
-    @PostMapping()
+    @PostMapping("")
 //    @PreAuthorize("hasAnyAuthority(‘USER’)”) --> USERS only
     public ResponseEntity<Article> postNewArticle(@RequestBody Article article) { // --> @Valid validate article
         return ResponseEntity.ok(this.articleService.postNewArticle(article));
@@ -44,7 +44,7 @@ public class ArticleController {
         return ResponseEntity.ok(article);
     }
 
-    @GetMapping() //Paginated article list
+    @GetMapping("") //Paginated article list
     public ResponseEntity<Page<Article>> getArticlesPaginated(Pageable pageable) {
         return ResponseEntity.ok(this.repo.findAllArticles(pageable));
     }
@@ -53,12 +53,13 @@ public class ArticleController {
 
     @DeleteMapping("/{id}")
 //    @PreAuthorize("isAuthenticated()") --> user can delete their own articles only (how to specify owner only can del?)
-    public ResponseEntity<Void> deleteArticle(@PathVariable("id") Long id) {
+    public ResponseEntity<HttpStatus> deleteArticle(@PathVariable("id") Long id) {
         // make sure it's available first, then delete via repository
 
         // need to fix later
-        return null;
+        return ResponseEntity.ok(HttpStatus.ACCEPTED);
     }
+
 
     /////// Comments ///////
     @PostMapping("/{id}/comment")
