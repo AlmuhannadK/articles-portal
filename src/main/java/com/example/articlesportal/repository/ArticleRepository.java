@@ -11,9 +11,4 @@ import java.util.List;
 
 public interface ArticleRepository extends JpaRepository<Article, Long> {
 
-//    Page<Article> findAllArticles(Pageable pageable); // fetch articles paginated (use in service)
-
-//    Page<Article> getAllArticles(Pageable pageable);
-
-//    Page<Article> findAll(Pageable pageable);
 }

@@ -1,6 +1,7 @@
 package com.example.articlesportal.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
@@ -32,12 +33,8 @@ public class Article {
     @CreationTimestamp
     private LocalDateTime createdAt;
 
-    @NotNull
     private Integer numberOfLikes;
-
-    @NotNull
     private Integer numberOfDislikes;
-    @NotNull
     private Boolean isDisabled;
 
 

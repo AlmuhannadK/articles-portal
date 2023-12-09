@@ -2,6 +2,7 @@ package com.example.articlesportal.service;
 
 import com.example.articlesportal.dto.ArticleDto;
 import com.example.articlesportal.entity.Article;
+import com.example.articlesportal.exception.ResourceNotFoundException;
 import com.example.articlesportal.repository.ArticleRepository;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -20,7 +21,6 @@ import java.util.stream.Collectors;
 public class ArticleService {
 
     private final ArticleRepository articleRepository;
-
     private final ModelMapper modelMapper;
 
 
@@ -29,7 +29,6 @@ public class ArticleService {
         Article article = mapToEntity(articleDto);
 //        article.setIsDisabled(false);
         this.articleRepository.save(article);
-
         return articleDto;
     }
 
@@ -49,6 +48,12 @@ public class ArticleService {
 
         Page<Article> articles = this.articleRepository.findAll(pageable);
         return articles.map(article -> mapToDto(article));
+    }
+
+    public void deleteArticleById(Long id) {
+
+        Article article = this.articleRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Article", "id", "id"));
+        this.articleRepository.delete(article);
     }
 
 

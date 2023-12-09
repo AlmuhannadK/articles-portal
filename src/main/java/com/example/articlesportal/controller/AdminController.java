@@ -18,11 +18,6 @@ import java.util.ResourceBundle;
 @RequiredArgsConstructor
 public class AdminController {
 
-    //testing -- Remove later
-    @Autowired
-    private UserRepository repo;
-
-
 
     @PutMapping("/{id}/disable")
     //    @PreAuthorize("hasAnyAuthority(‘ADMIN’)”) --> ADMIN only
@@ -38,10 +33,4 @@ public class AdminController {
         return ResponseEntity.ok(HttpStatus.ACCEPTED);
     }
 
-
-//    @GetMapping("/test")
-//    public ResponseEntity<List<Article>> getArticles() {
-//        List<Article> articles = this.articleRepository.findAll();
-//        return ResponseEntity.ok(articles);
-//    }
 }

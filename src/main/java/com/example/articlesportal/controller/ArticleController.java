@@ -43,39 +43,14 @@ public class ArticleController {
     public ResponseEntity<Page<ArticleDto>> getArticlesPaginated(Pageable pageable) {
         return ResponseEntity.ok(this.articleService.getAllArticles(pageable));
     }
-//
-//    // BONUS images here (not important right now)
-//
+
     @DeleteMapping("/{id}")
 //    @PreAuthorize("isAuthenticated()") --> user can delete their own articles only (how to specify owner only can del?)
-    public ResponseEntity<HttpStatus> deleteArticle(@PathVariable("id") Long id) {
-        // make sure it's available first, then delete via repository
+    public ResponseEntity<String> deleteArticle(@PathVariable("id") Long id) {
 
-        // need to fix later
-        return ResponseEntity.ok(HttpStatus.ACCEPTED);
+        this.articleService.deleteArticleById(id);
+        return new ResponseEntity<>("Article deleted successfully!", HttpStatus.OK);
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
