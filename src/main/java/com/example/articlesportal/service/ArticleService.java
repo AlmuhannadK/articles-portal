@@ -5,10 +5,15 @@ import com.example.articlesportal.entity.Article;
 import com.example.articlesportal.repository.ArticleRepository;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -21,40 +26,37 @@ public class ArticleService {
 
     public ArticleDto postNewArticle(ArticleDto articleDto) {
 
-        // convert to entity
-        Article article = new Article();
-        article.setTitle(articleDto.getTitle());
-        article.setBody(articleDto.getBody());
-        article.setIsDisabled(false);
-        article.setNumberOfLikes(0);
-        article.setNumberOfDislikes(0);
-        // article.setAuthor();  --> current logged in user
+        Article article = mapToEntity(articleDto);
+//        article.setIsDisabled(false);
+        this.articleRepository.save(article);
 
-        Article newArticle = this.articleRepository.save(article);
-
-        // convert back to dto to return
-        ArticleDto articleResponse = new ArticleDto();
-        articleResponse.setTitle(newArticle.getTitle());
-        articleResponse.setBody(newArticle.getBody());
-
-        return articleResponse;
+        return articleDto;
     }
 
     public ArticleDto getArticleById(Long id) {
-
         Optional<Article> optionalArticle = this.articleRepository.findById(id);
         if (optionalArticle.isPresent()) {
-            Article article = optionalArticle.get();
-            // map to dto
-            ArticleDto articleDto = new ArticleDto();
-            articleDto.setTitle(article.getTitle());
-            articleDto.setBody(article.getBody());
+            Article articleEntity = optionalArticle.get();
+            ArticleDto articleDto = mapToDto(articleEntity);
             return articleDto;
-        }else{
+        } else {
             optionalArticle.orElseThrow();
         }
         return null;
     }
+
+
+    public List<ArticleDto> getAllArticles(Pageable pageable) {
+
+//        Pageable pageable = PageRequest.of(pageable);
+        Page<Article> articles = this.articleRepository.findAll(pageable);
+
+        // get content from page object
+        List<Article> listOfArticles = articles.getContent();
+
+        return listOfArticles.stream().map(article -> mapToDto(article)).collect(Collectors.toList());
+    }
+
 
 
     //convert Entity to Dto

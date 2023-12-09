@@ -1,8 +1,11 @@
 package com.example.articlesportal.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
+import org.modelmapper.internal.bytebuddy.implementation.bind.annotation.Default;
+import org.springframework.boot.context.properties.bind.DefaultValue;
 
 import java.time.LocalDateTime;
 import java.util.HashSet;
@@ -29,11 +32,12 @@ public class Article {
     @CreationTimestamp
     private LocalDateTime createdAt;
 
-
+    @NotNull
     private Integer numberOfLikes;
 
+    @NotNull
     private Integer numberOfDislikes;
-
+    @NotNull
     private Boolean isDisabled;
 
 

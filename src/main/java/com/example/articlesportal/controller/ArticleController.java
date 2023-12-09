@@ -40,8 +40,8 @@ public class ArticleController {
     }
 
     @GetMapping() //Paginated article list
-    public ResponseEntity<Page<ArticleDto>> getArticlesPaginated(Pageable pageable) {
-        return ResponseEntity.ok(null);
+    public ResponseEntity<List<ArticleDto>> getArticlesPaginated(Pageable pageable) {
+        return ResponseEntity.ok(this.articleService.getAllArticles(pageable));
     }
 //
 //    // BONUS images here (not important right now)

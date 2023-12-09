@@ -1,6 +1,8 @@
 package com.example.articlesportal.controller;
 
+import com.example.articlesportal.entity.Article;
 import com.example.articlesportal.entity.User;
+import com.example.articlesportal.repository.ArticleRepository;
 import com.example.articlesportal.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,8 +18,10 @@ import java.util.ResourceBundle;
 @RequiredArgsConstructor
 public class AdminController {
 
+    //testing -- Remove later
     @Autowired
     private UserRepository repo;
+
 
 
     @PutMapping("/{id}/disable")
@@ -35,10 +39,9 @@ public class AdminController {
     }
 
 
-    //test contorller
-    @GetMapping("/test")
-    public ResponseEntity<List<User>> getUsers() {
-        List<User> users = this.repo.findAll();
-        return ResponseEntity.ok(users);
-    }
+//    @GetMapping("/test")
+//    public ResponseEntity<List<Article>> getArticles() {
+//        List<Article> articles = this.articleRepository.findAll();
+//        return ResponseEntity.ok(articles);
+//    }
 }
