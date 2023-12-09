@@ -25,7 +25,10 @@ public class Comment {
     @CreationTimestamp
     private LocalDateTime createdAt;
 
-    //relation one to many?
-//    private User user;  // --> logged in username
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "article_id", nullable = false)
+    private Article article;
+
 
 }
