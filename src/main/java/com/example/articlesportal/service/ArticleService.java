@@ -45,16 +45,10 @@ public class ArticleService {
         return null;
     }
 
+    public Page<ArticleDto> getAllArticles(Pageable pageable) {
 
-    public List<ArticleDto> getAllArticles(Pageable pageable) {
-
-//        Pageable pageable = PageRequest.of(pageable);
         Page<Article> articles = this.articleRepository.findAll(pageable);
-
-        // get content from page object
-        List<Article> listOfArticles = articles.getContent();
-
-        return listOfArticles.stream().map(article -> mapToDto(article)).collect(Collectors.toList());
+        return articles.map(article -> mapToDto(article));
     }
 
 
