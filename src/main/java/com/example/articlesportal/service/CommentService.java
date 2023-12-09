@@ -43,9 +43,6 @@ public class CommentService {
         return comments.stream().map(comment -> mapToDto(comment)).collect(Collectors.toList());
     }
 
-
-
-
                         // mappers
     private CommentDto mapToDto(Comment comment) {
         CommentDto commentDto = modelMapper.map(comment, CommentDto.class);

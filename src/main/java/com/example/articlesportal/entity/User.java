@@ -3,11 +3,14 @@ package com.example.articlesportal.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "users")
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class User {
@@ -32,10 +35,11 @@ public class User {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "author", cascade = CascadeType.ALL)
     private List<Article> articles;
 
-    //many to many
-//    private List<Privileges> privileges; --> ROLE_USER
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "user_privilege",
+            joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id")},
+            inverseJoinColumns = {@JoinColumn(name = "privilege_name", referencedColumnName = "name")})
+    private Set<Privilege> privileges = new HashSet<>();
 
-    // one to many
-//    private List<Comments> comments;
 
 }
