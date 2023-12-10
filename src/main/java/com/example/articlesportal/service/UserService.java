@@ -1,7 +1,7 @@
 package com.example.articlesportal.service;
 
-import com.example.articlesportal.dto.ArticleDto;
-import com.example.articlesportal.entity.Article;
+import com.example.articlesportal.dto.UserDto;
+import com.example.articlesportal.entity.User;
 import com.example.articlesportal.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -21,13 +21,13 @@ public class UserService {
 
 
 //    //convert Entity to Dto
-//    private ArticleDto mapToDto(Article article) {
-//        ArticleDto articleDto = modelMapper.map(article, ArticleDto.class);
-//        return articleDto;
-//    }
-//    //convert Dto to Entity
-//    private Article mapToEntity(ArticleDto articleDto) {
-//        Article article = modelMapper.map(articleDto, Article.class);
-//        return article;
-//    }
+    private UserDto mapToDto(User user) {
+        UserDto userDto = modelMapper.map(user, UserDto.class);
+        return userDto;
+    }
+    //convert Dto to Entity
+    private User mapToEntity(UserDto userDto) {
+        User user = modelMapper.map(userDto, User.class);
+        return user;
+    }
 }
