@@ -1,9 +1,6 @@
 package com.example.articlesportal.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -18,7 +15,7 @@ import lombok.Setter;
 public class Privilege {
 
     @Id
-    @Column(length = 16)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String name;
 
 }

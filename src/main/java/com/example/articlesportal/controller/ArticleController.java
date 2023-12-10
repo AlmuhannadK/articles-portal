@@ -45,8 +45,10 @@ public class ArticleController {
         return ResponseEntity.ok(this.articleService.getAllArticles(pageable));
     }
 
+    // user can delete their own articles only (how to specify owner only can del?)
     @DeleteMapping("/{id}")
-//    @PreAuthorize("isAuthenticated()") --> user can delete their own articles only (how to specify owner only can del?)
+    @PreAuthorize("hasRole('USER')")
+//    @PreAuthorize("isAuthenticated()")
     public ResponseEntity<String> deleteArticle(@PathVariable("id") Long id) {
 
         this.articleService.deleteArticleById(id);
