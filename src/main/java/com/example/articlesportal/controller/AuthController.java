@@ -22,7 +22,7 @@ public class AuthController {
         return ResponseEntity.ok(userDto);
     }
 
-    @PostMapping("/login")
+    @GetMapping("/login")
     public ResponseEntity<String> userLogin(@RequestBody LoginDto loginDto) { //@Valid validate user credentials
         String response = this.userService.userLogin(loginDto);
         return ResponseEntity.ok(response);

@@ -1,5 +1,6 @@
 package com.example.articlesportal.config;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -21,7 +22,6 @@ import org.springframework.security.web.SecurityFilterChain;
 public class SecurityConfig {
 
     private UserDetailsService userDetailsService;
-
     public SecurityConfig(UserDetailsService userDetailsService) {
         this.userDetailsService = userDetailsService;
     }
@@ -31,7 +31,7 @@ public class SecurityConfig {
         return new BCryptPasswordEncoder();
     }
 
-    @Bean //uses userdetailsservice to get user from database & use password encoder
+    @Bean //uses userdetails to get user from database & use password encoder
     public AuthenticationManager authenticationManager(AuthenticationConfiguration configuration) throws Exception {
         return configuration.getAuthenticationManager();
     }
@@ -45,6 +45,10 @@ public class SecurityConfig {
                 .authorizeHttpRequests((authorize) ->
                         // {opens all requests} authorize.anyRequest().authenticated()
                         authorize.requestMatchers(HttpMethod.GET, "/api/**").permitAll()
+                                .requestMatchers("/api/auth/login").permitAll()
+                                .requestMatchers("/api/auth/user").permitAll()
+                                .requestMatchers("/api/auth/logout").authenticated()
+
                                 .anyRequest().authenticated()
                 )
 //                .authorizeHttpRequests((authorize) ->

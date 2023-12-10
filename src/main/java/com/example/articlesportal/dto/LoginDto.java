@@ -13,12 +13,11 @@ import lombok.Setter;
 @AllArgsConstructor
 public class LoginDto {
 
-    @NotEmpty
-    @Pattern(regexp = "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}$")
-    private String email;
+//    @NotEmpty
+    private String usernameOrEmail;
 
-    @NotEmpty(message = "password must not be empty")
-    @Pattern(regexp = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=\\S+$).{5,}$")
+//    @NotEmpty(message = "password must not be empty")
+//    @Pattern(regexp = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=\\S+$).{5,}$")
     private String password;
 
 }

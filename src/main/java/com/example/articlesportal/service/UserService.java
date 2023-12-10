@@ -18,13 +18,13 @@ public class UserService {
 
     private final UserRepository userRepository;
     private final ModelMapper modelMapper;
-    private AuthenticationManager authenticationManager;
+    private final AuthenticationManager authenticationManager;
 
 
     public String userLogin(LoginDto loginDto) {
 
         Authentication authentication = this.authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
-                loginDto.getEmail(), loginDto.getPassword()));
+                loginDto.getUsernameOrEmail(), loginDto.getPassword()));
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
