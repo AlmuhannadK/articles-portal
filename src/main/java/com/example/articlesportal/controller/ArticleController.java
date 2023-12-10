@@ -52,6 +52,16 @@ public class ArticleController {
         return ResponseEntity.ok("Article deleted successfully!");
     }
 
+
+
+
+
+
+
+
+
+
+
                                         /////// Like & Dislikes ///////
     @PutMapping("/{id}/like")
 //    @PreAuthorize("hasAnyAuthority(‘USER’)”) --> users only

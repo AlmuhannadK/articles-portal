@@ -24,10 +24,10 @@ public class Article {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String title; //less than 100 chars
+    private String title;
 
     @Column(columnDefinition = "TEXT")
-    private String body; // less than 500 chars
+    private String body;
 
 
     @CreationTimestamp
