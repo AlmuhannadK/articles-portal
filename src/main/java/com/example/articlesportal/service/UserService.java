@@ -42,12 +42,7 @@ public class UserService {
     }
 
     public String registerUser(UserDto userDto) {
-//        if ( !usernameAlreadyExists(userDto)) {
-//            throw new ArticleAPIException(HttpStatus.BAD_REQUEST, "Username already exists");
-//        }
-//        if ( !emailAlreadyExists(userDto)) {
-//            throw new ArticleAPIException(HttpStatus.BAD_REQUEST, "Email already exists");
-//        }
+
         if ( !usernameAlreadyExists(userDto) && !emailAlreadyExists(userDto)){
 
             User user = mapToEntity(userDto);
@@ -65,6 +60,9 @@ public class UserService {
             throw new ArticleAPIException(HttpStatus.BAD_REQUEST, "User already exists");
         }
     }
+
+//    public void logout(){
+//    }
 
 
     // mapping

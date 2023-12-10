@@ -56,6 +56,35 @@ public class ArticleService {
         this.articleRepository.delete(article);
     }
 
+    public HttpStatus likeArticle(Long id) {
+
+        Optional<Article> optionalArticle = Optional.ofNullable(this.articleRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Article", "id", id)));
+
+            Article article = optionalArticle.get();
+
+            Integer likes = article.getNumberOfLikes();
+            likes = likes + 1;
+            article.setNumberOfLikes(likes);
+            this.articleRepository.save(article);
+
+            return HttpStatus.ACCEPTED;
+    }
+    public HttpStatus dislikeArticle(Long id) {
+
+        Optional<Article> optionalArticle = Optional.ofNullable(this.articleRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Article", "id", id)));
+
+            Article article = optionalArticle.get();
+
+            Integer dislikes = article.getNumberOfDislikes();
+            dislikes = dislikes + 1;
+            article.setNumberOfDislikes(dislikes);
+            this.articleRepository.save(article);
+
+            return HttpStatus.ACCEPTED;
+    }
+
     //convert Entity to Dto
     private ArticleDto mapToDto(Article article) {
         ArticleDto articleDto = modelMapper.map(article, ArticleDto.class);

@@ -57,27 +57,17 @@ public class ArticleController {
 
 
 
-
-
-
-
-
-
-
-
                                         /////// Like & Dislikes ///////
     @PutMapping("/{id}/like")
-//    @PreAuthorize("hasRole('USER')")
+    @PreAuthorize("hasRole('USER')")
     public ResponseEntity<HttpStatus> articleLike(@PathVariable("id") Long id) {
-        // fetch article by id, then increment like counter ( set like++?)
-        return ResponseEntity.ok(HttpStatus.ACCEPTED);
+        return ResponseEntity.ok(this.articleService.likeArticle(id));
     }
 
     @PutMapping("/{id}/dislike")
-//    @PreAuthorize("hasRole('USER')")
+    @PreAuthorize("hasRole('USER')")
     public ResponseEntity<HttpStatus> articleDislike(@PathVariable("id") Long id) {
-        // fetch article by id, then increment dislike counter ( set dislike++?)
-        return ResponseEntity.ok(HttpStatus.ACCEPTED);
+        return ResponseEntity.ok(this.articleService.dislikeArticle(id));
     }
 
 }

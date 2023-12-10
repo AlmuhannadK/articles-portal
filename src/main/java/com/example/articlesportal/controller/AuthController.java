@@ -19,7 +19,7 @@ public class AuthController {
 
 
     @GetMapping("/login")
-    public ResponseEntity<String> userLogin(@RequestBody LoginDto loginDto) { //@Valid validate user credentials
+    public ResponseEntity<String> userLogin(@RequestBody @Valid LoginDto loginDto) {
         String response = this.userService.userLogin(loginDto);
         return ResponseEntity.ok(response);
     }
