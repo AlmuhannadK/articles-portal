@@ -5,14 +5,13 @@ import com.example.articlesportal.entity.Privilege;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.List;
 import java.util.Set;
 
-@Data
+@Setter
+@Getter
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserDto {
@@ -34,7 +33,7 @@ public class UserDto {
     @Pattern(regexp = "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}$")
     private String email;
 
-    private List<Article> articles;
+    //private List<Article> articles;
 
-    private Set<Privilege> privileges;
+    //private Set<Privilege> privileges;
 }

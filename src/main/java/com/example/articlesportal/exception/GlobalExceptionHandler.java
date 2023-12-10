@@ -37,6 +37,13 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         return new ResponseEntity<>(response, response.getStatus());
     }
 
+    @ExceptionHandler(ArticleAPIException.class)
+    public ResponseEntity<ErrorDetails> handleArticleAPIException(ArticleAPIException exception,
+                                                               WebRequest webRequest){
+        ErrorDetails errorDetails = new ErrorDetails( HttpStatus.BAD_REQUEST ,new Date(), exception.getMessage());
+        return new ResponseEntity<>(errorDetails, HttpStatus.BAD_REQUEST);
+    }
+
 
     @Override
     protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,

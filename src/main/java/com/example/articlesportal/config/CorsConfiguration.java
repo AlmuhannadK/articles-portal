@@ -6,7 +6,7 @@ import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 //@Configuration
-//public class CorsConfiguration{
+public class CorsConfiguration{
 //
 //    @Bean
 //    public WebMvcConfigurer corsConfig() {
@@ -25,4 +25,4 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 //            }
 //        };
 //    }
-//}
+}
