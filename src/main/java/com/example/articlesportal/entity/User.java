@@ -19,23 +19,21 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    //unique
-    @Column(unique = true)
+    @Column(unique = true, nullable = true)
     private String username;
+
+    @Column(unique = true, nullable = true)
+    private String email;
 
     private String mobileNumber;
 
     private String password;
 
-    //unique
-    @Column(unique = true)
-    private String email;
-
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "author", cascade = CascadeType.ALL)
     private List<Article> articles;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(name = "user_privilege",
             joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id")},
             inverseJoinColumns = {@JoinColumn(name = "privilege_name", referencedColumnName = "name")})

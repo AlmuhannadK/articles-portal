@@ -6,6 +6,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,7 +19,7 @@ public class CommentController {
     private final CommentService commentService;
 
     @PostMapping("")
-//    @PreAuthorize("hasAnyAuthority(‘USER’)”)
+    @PreAuthorize("hasRole('USER')")
     public ResponseEntity<CommentDto> commentArticle(@PathVariable("id") Long id, @RequestBody @Valid CommentDto commentDto) {
         return new ResponseEntity<>(this.commentService.createComment(id,commentDto), HttpStatus.CREATED);
     }

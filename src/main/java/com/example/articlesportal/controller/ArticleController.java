@@ -13,6 +13,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -28,7 +29,7 @@ public class ArticleController {
 
 
     @PostMapping()
-//    @PreAuthorize("hasAnyAuthority(‘USER’)”) --> USERS only
+    @PreAuthorize("hasRole('USER')")
     public ResponseEntity<ArticleDto> postNewArticle(@RequestBody @Valid ArticleDto articleDto) {
 
         return new ResponseEntity<>(this.articleService.postNewArticle(articleDto), HttpStatus.CREATED);
@@ -64,14 +65,14 @@ public class ArticleController {
 
                                         /////// Like & Dislikes ///////
     @PutMapping("/{id}/like")
-//    @PreAuthorize("hasAnyAuthority(‘USER’)”) --> users only
+//    @PreAuthorize("hasRole('USER')")
     public ResponseEntity<HttpStatus> articleLike(@PathVariable("id") Long id) {
         // fetch article by id, then increment like counter ( set like++?)
         return ResponseEntity.ok(HttpStatus.ACCEPTED);
     }
 
     @PutMapping("/{id}/dislike")
-//    @PreAuthorize("hasAnyAuthority(‘USER’)”) --> users only
+//    @PreAuthorize("hasRole('USER')")
     public ResponseEntity<HttpStatus> articleDislike(@PathVariable("id") Long id) {
         // fetch article by id, then increment dislike counter ( set dislike++?)
         return ResponseEntity.ok(HttpStatus.ACCEPTED);

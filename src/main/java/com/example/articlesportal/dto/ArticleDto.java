@@ -18,12 +18,11 @@ public class ArticleDto {
     @Size(min = 2, max = 500, message = "less than 500 characters")
     private String body;
 
+
+    private Integer numberOfLikes;
+    private Integer numberOfDislikes;
+    private String author;
+
     private Set<CommentDto> comments;
-
-
-
-//    private Integer numberOfLikes;
-//    private Integer numberOfDislikes;
-//    private String author; --> put user entity's (username) after mapping to entity
 
 }
